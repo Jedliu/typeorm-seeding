@@ -1,5 +1,5 @@
 import type { Connection } from 'typeorm'
-import yargs from 'yargs'
+import * as yargs from 'yargs'
 import { configureConnection, fetchConnection } from '../../../src'
 import { SeedCommand } from '../../../src/commands/seed.command'
 

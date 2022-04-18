@@ -1,4 +1,4 @@
-import yargs from 'yargs'
+import * as yargs from 'yargs'
 import { SeedCommand } from '../../../src/commands/seed.command'
 
 describe(SeedCommand, () => {

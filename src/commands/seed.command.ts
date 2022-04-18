@@ -1,12 +1,12 @@
-import { Arguments, Argv, CommandModule, exit } from 'yargs'
-import ora, { Ora } from 'ora'
 import { gray } from 'chalk'
+import ora, { Ora } from 'ora'
+import { Arguments, Argv, CommandModule, exit } from 'yargs'
 import { configureConnection, getConnectionOptions } from '../connection'
+import { SeederImportationError } from '../errors/SeederImportationError'
 import { Seeder } from '../seeder'
+import type { ConnectionOptions, Constructable } from '../types'
 import { useSeeders } from '../useSeeders'
 import { calculateFilePaths } from '../utils/fileHandling'
-import type { ConnectionOptions, Constructable } from '../types'
-import { SeederImportationError } from '../errors/SeederImportationError'
 
 interface SeedCommandArguments extends Arguments {
   root?: string
@@ -98,12 +98,12 @@ export class SeedCommand implements CommandModule {
       return
     }
 
-    console.log('👍 ', gray.underline(`Finished Seeding`))
+    if (process.env.NODE_ENV !== 'test') console.log('👍 ', gray.underline(`Finished Seeding`))
   }
 }
 
 function panic(spinner: Ora, error: Error, message: string) {
   spinner.fail(message)
-  console.error(error.message)
+  if (process.env.NODE_ENV !== 'test') console.error(error.message)
   exit(1, error)
 }

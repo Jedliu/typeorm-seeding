@@ -1,4 +1,4 @@
-import yargs from 'yargs'
+import * as yargs from 'yargs'
 import { ConfigCommand } from '../../src/commands/config.command'
 
 describe(ConfigCommand, () => {
